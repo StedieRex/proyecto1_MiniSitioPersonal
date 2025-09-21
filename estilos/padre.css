@@ -36,35 +36,11 @@ footer {
   flex: 1;
 }
 
-.paginasSecundarias {
-  background: #e9ecef;
-  padding: 5vh 2vw;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-
 .paginasSecundarias > div {
   margin: 16px 0;
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.paginasSecundarias button {
-  padding: 12px 32px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-  background: #007BFF;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.2s;
-  width: 80%;
-  max-width: 250px;
 }
 
 .paginasSecundarias button:hover {
@@ -73,9 +49,9 @@ footer {
 
 .foto {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 50px;
   object-fit: cover;
 }
 
@@ -115,4 +91,168 @@ footer {
   .descripcion {
     text-align: left;
   }
+}
+
+/* Estilos base para la sección de páginas secundarias */
+.paginasSecundarias {
+  background: #e9ecef url('ruta/imagen-default.jpg') center/cover no-repeat;
+  padding: 5vh 2vw;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  transition: background-image 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px; /* Altura mínima para mejor visualización */
+}
+
+/* Capa overlay */
+.paginasSecundarias::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Cuando se activa un contenido, reducimos la opacidad del overlay */
+.paginasSecundarias.contenido-activo::before {
+  opacity: 0.7;
+}
+
+/* Contenedor de botones principales */
+.contenedor-botones-principales {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Contenedor de contenido secundario (se muestra al hacer clic) */
+.contenido-secundario {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  overflow-y: auto;
+}
+
+/* Cuando el contenido está activo */
+.contenido-activo .contenido-secundario {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.contenido-activo .contenedor-botones-principales {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+}
+
+/* Botón de regreso */
+.btn-regresar {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 4;
+  padding: 8px 16px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.contenido-activo .btn-regresar {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-regresar:hover {
+  background: #5a6268;
+}
+
+/* Clases para los diferentes fondos con imágenes */
+.paginasSecundarias.fondo-acerca {
+  background-image: url('ruta/imagen-acerca.jpg');
+}
+
+.paginasSecundarias.fondo-portafolio {
+  background-image: url('ruta/imagen-portafolio.jpg');
+}
+
+.paginasSecundarias.fondo-contacto {
+  background-image: url('ruta/imagen-contacto.jpg');
+}
+
+/* Efecto hover para los botones principales */
+.paginasSecundarias button {
+  padding: 12px 32px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 80%;
+  max-width: 250px;
+  margin: 10px 0;
+}
+
+.paginasSecundarias button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el contenido de portafolio y contacto */
+.contenido-portafolio,
+.contenido-contacto {
+  text-align: center;
+}
+
+.contenido-portafolio h3,
+.contenido-contacto h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.enlace-proyecto,
+.enlace-contacto {
+  display: block;
+  padding: 10px 15px;
+  margin: 8px 0;
+  background: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.enlace-proyecto:hover,
+.enlace-contacto:hover {
+  background: #0056b3;
 }

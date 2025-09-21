@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="estilos/padre.css">
+    <script src="logica/main.js"></script>
 </head>
+
 <body>
     <div class="main-contenedor">
         <section id="datosGenerales">
@@ -23,13 +26,37 @@
         </section>
 
         <section class="paginasSecundarias">
-            <div class="acercaDeMi" onclick="window.location.href='acercaDeMi.html'"> <button>Acerca de mí</button> </div>
-            <div class="portafolio"> <button>Portafolio</button> </div>
-            <div class="contacto"> <button>Contacto</button> </div>
+            <!-- Botón de regreso (oculto inicialmente) -->
+            <button class="btn-regresar">← Regresar</button>
+    
+            <!-- Contenedor de botones principales -->
+            <div class="contenedor-botones-principales">
+                <div class="acercaDeMi" onclick="window.location.href='acercaDeMi.html'"><button>Acerca de mí</button></div>
+                <div class="portafolio"><button>Portafolio</button></div>
+                <div class="contacto"><button>Contacto</button></div>
+            </div>
+    
+            <!-- Contenido de Portafolio -->
+            <div class="contenido-secundario contenido-portafolio">
+                <h3>Mis Proyectos</h3>
+                <a href="#" class="enlace-proyecto">Proyecto 1</a>
+                <a href="#" class="enlace-proyecto">Proyecto 2</a>
+                <a href="#" class="enlace-proyecto">Proyecto 3</a>
+            </div>
+    
+            <!-- Contenido de Contacto -->
+            <div class="contenido-secundario contenido-contacto">
+                <h3>Contacto</h3>
+                <a href="mailto:email@ejemplo.com" class="enlace-contacto">Email</a>
+                <a href="#" class="enlace-contacto">LinkedIn</a>
+                <a href="#" class="enlace-contacto">GitHub</a>
+            </div>
         </section>
+        
     </div>
     <footer>
 
     </footer>
 </body>
+
 </html>
