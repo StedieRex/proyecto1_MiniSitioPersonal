@@ -1,20 +1,23 @@
+/* Reset básico y fuente */
 body {
   background-color: #f4f4f4;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
-}
-
-.main-contenedor {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  box-sizing: border-box;
 }
 
+/* Contenedor principal: ocupa todo el espacio menos el footer */
+.main-contenedor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Footer fijo al fondo */
 footer {
   width: 100%;
   height: 80px;
@@ -26,38 +29,40 @@ footer {
   margin-top: auto;
 }
 
-#datosGenerales {
+/* Paneles principales: igual tamaño y altura */
+#datosGenerales,
+.paginasSecundarias {
+  flex: 1 1 50%;
+  max-width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 5vh 2vw;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex: 1;
-}
-
-.paginasSecundarias > div {
-  margin: 16px 0;
-  width: 100%;
-  display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 0;
+  padding: 5vh 3vw;
 }
 
-.paginasSecundarias button:hover {
-  background: #0056b3;
+/* Panel de datos generales */
+#datosGenerales {
+  background-color: #FF9800; /* Naranja fuerte */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
+/* Imagen de perfil con espacio extra */
 .foto {
   border-radius: 50%;
   width: 150px;
   height: 150px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   object-fit: cover;
 }
 
+/* Descripción */
 .descripcion {
   text-align: center;
   max-width: 600px;
+  margin-top: 16px;
 }
 
 .descripcion h1 {
@@ -71,63 +76,31 @@ footer {
   line-height: 1.6;
 }
 
-/* Media query para pantallas más grandes */
-@media (min-width: 768px) {
-  .main-contenedor {
-    flex-direction: row;
-    min-height: calc(100vh - 80px);
-  }
-  
-  #datosGenerales, .paginasSecundarias {
-    flex: 1 1 50%;
-    max-width: 50%;
-    padding: 5vh 3vw;
-  }
-  
-  #datosGenerales {
-    justify-content: center;
-  }
-  
-  .descripcion {
-    text-align: left;
-  }
-}
-
-/* Estilos base para la sección de páginas secundarias */
+/* Panel de navegación */
 .paginasSecundarias {
   background: #e9ecef url('ruta/imagen-default.jpg') center/cover no-repeat;
-  padding: 5vh 2vw;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  transition: background-image 0.5s ease;
   position: relative;
   overflow: hidden;
-  min-height: 400px; /* Altura mínima para mejor visualización */
+  transition: background-image 0.5s ease;
 }
 
-/* Capa overlay */
+/* Overlay */
 .paginasSecundarias::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.9);
+  inset: 0;
+  background: rgba(255,255,255,0.9);
   z-index: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s;
 }
 
-/* Cuando se activa un contenido, reducimos la opacidad del overlay */
+/* Overlay activo */
 .paginasSecundarias.contenido-activo::before {
   opacity: 0.7;
 }
 
-/* Contenedor de botones principales */
+/* Botones principales centrados y con gap */
 .contenedor-botones-principales {
   position: relative;
   z-index: 2;
@@ -135,36 +108,31 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  gap: 24px;
+  transition: opacity 0.3s, transform 0.3s;
 }
 
-/* Contenedor de contenido secundario (se muestra al hacer clic) */
-.contenido-secundario {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  padding: 20px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-  overflow-y: auto;
+/* Botón principal */
+.paginasSecundarias button {
+  padding: 12px 40px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  max-width: 250px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  outline: none;
+  text-align: center;
 }
 
-/* Cuando el contenido está activo */
-.contenido-activo .contenido-secundario {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.contenido-activo .contenedor-botones-principales {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-20px);
+.paginasSecundarias button:hover,
+.paginasSecundarias button:focus {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
 }
 
 /* Botón de regreso */
@@ -180,9 +148,10 @@ footer {
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.3s ease;
+  transition: background 0.3s;
   opacity: 0;
   visibility: hidden;
+  outline: none;
 }
 
 .contenido-activo .btn-regresar {
@@ -190,11 +159,38 @@ footer {
   visibility: visible;
 }
 
-.btn-regresar:hover {
+.btn-regresar:hover,
+.btn-regresar:focus {
   background: #5a6268;
 }
 
-/* Clases para los diferentes fondos con imágenes */
+/* Contenido secundario animado */
+.contenido-secundario {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.95);
+}
+
+.contenido-activo .contenido-secundario {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.contenido-activo .contenedor-botones-principales {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+}
+
+/* Fondos personalizados */
 .paginasSecundarias.fondo-acerca {
   background-image: url('ruta/imagen-acerca.jpg');
 }
@@ -207,39 +203,7 @@ footer {
   background-image: url('ruta/imagen-contacto.jpg');
 }
 
-/* Efecto hover para los botones principales */
-.paginasSecundarias button {
-  padding: 12px 32px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-  background: #007BFF;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 80%;
-  max-width: 250px;
-  margin: 10px 0;
-}
-
-.paginasSecundarias button:hover {
-  background: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilos para el contenido de portafolio y contacto */
-.contenido-portafolio,
-.contenido-contacto {
-  text-align: center;
-}
-
-.contenido-portafolio h3,
-.contenido-contacto h3 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
+/* Enlaces de portafolio/contacto */
 .enlace-proyecto,
 .enlace-contacto {
   display: block;
@@ -249,10 +213,57 @@ footer {
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  transition: background 0.3s ease;
+  transition: background 0.3s;
 }
 
 .enlace-proyecto:hover,
 .enlace-contacto:hover {
   background: #0056b3;
+}
+
+/* Responsive: paneles lado a lado en pantallas grandes */
+@media (min-width: 768px) {
+  .main-contenedor {
+    flex-direction: row;
+    min-height: calc(100vh - 80px);
+  }
+  #datosGenerales, .paginasSecundarias {
+    flex: 1 1 50%;
+    max-width: 50%;
+    min-width: 0;
+    min-height: 0;
+    padding: 5vh 3vw;
+  }
+  .descripcion {
+    text-align: left;
+  }
+}
+
+/* Responsive extra: mejor experiencia en móviles */
+@media (max-width: 480px) {
+  .foto {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 24px;
+  }
+  .descripcion {
+    font-size: 0.95rem;
+    margin-top: 8px;
+  }
+  .paginasSecundarias button {
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    width: 100%;
+    max-width: 180px;
+  }
+  .contenedor-botones-principales {
+    gap: 16px;
+  }
+}
+
+.contenido-portafolio {
+  margin-top: 60px; /* Ajusta el valor según el espacio que necesites */
+}
+.contenido-contacto {
+  margin-top: 40px; /* Ajusta el valor según el espacio que necesites */
 }
